@@ -23,8 +23,7 @@ def has_access_to_uinput():
 def cli_main():
     from .info import __logo__, __version__
     print("")
-    print(__logo__.strip())
-    print("                             v{}".format(__version__))
+    print("===================== {} v{} =====================".format(__logo__, __version__))
     print("")
 
     # Parse args
