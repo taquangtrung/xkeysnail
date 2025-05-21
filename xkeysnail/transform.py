@@ -16,6 +16,18 @@ import Xlib.display
 def get_active_window_wm_class(display=Xlib.display.Display()):
     """Get active window's WM_CLASS"""
     current_window = display.get_input_focus().focus
+
+    # TRUNG: Hack to check if Rofi is running and return the WM_CLASS of Rofi
+    # Find the Rofi window from the root window
+    root_window = current_window.query_tree().root
+    if root_window:
+        for child_window in root_window.query_tree().children:
+            if child_window:
+                wmclass = child_window.get_wm_class()
+                if wmclass and "Rofi" in wmclass:
+                    return "Rofi"
+
+    # Otherwise, find WM_CLASS of the current windows as usual
     pair = get_class_name(current_window)
     if pair:
         # (process name, class name)
@@ -39,6 +51,7 @@ def get_class_name(window):
         return wmclass
     except:
         return None
+
 
 # ============================================================ #
 
@@ -386,6 +399,7 @@ def multipurpose_handler(multipurpose_map, key, action):
 def on_event(event, device_name, quiet):
     key = Key(event.code)
     action = Action(event.value)
+
     wm_class = None
     # translate keycode (like xmodmap)
     active_mod_map = _mod_map
