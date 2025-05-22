@@ -23,9 +23,12 @@ def get_active_window_wm_class(display=Xlib.display.Display()):
     if root_window:
         for child_window in root_window.query_tree().children:
             if child_window:
-                wmclass = child_window.get_wm_class()
-                if wmclass and "Rofi" in wmclass:
-                    return "Rofi"
+                try:
+                    wmclass = child_window.get_wm_class()
+                    if wmclass and "Rofi" in wmclass:
+                        return "Rofi"
+                except:
+                    pass
 
     # Otherwise, find WM_CLASS of the current windows as usual
     pair = get_class_name(current_window)

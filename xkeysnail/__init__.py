@@ -21,9 +21,9 @@ def has_access_to_uinput():
 
 
 def cli_main():
-    from .info import __logo__, __version__
+    from .info import __appname__, __version__
     print("")
-    print("===================== {} v{} =====================".format(__logo__, __version__))
+    print("{} v{}".format(__appname__, __version__))
     print("")
 
     # Parse args

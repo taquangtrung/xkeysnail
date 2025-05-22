@@ -2,7 +2,7 @@
 
 __version__ = "0.4.0"
 
-__logo__ = """XKEYSNAIL"""
+__appname__ = """XKEYSNAIL"""
 
 __description__ = "Yet another keyboard remapping tool for X environment."
 
